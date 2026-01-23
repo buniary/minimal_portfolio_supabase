@@ -1,66 +1,54 @@
+import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
-import styles from "./page.module.css";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  const { data: projects } = await supabase.from("portfolio").select();
+  console.log(projects);
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <div className="container latest_portfolio">
+        <div className="row intro">
+          <div className="col-md-4">
+            <div className="contents shadow">
+              <h2 className="heading2">I&apos;m alikerock</h2>
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="contents shadow">
+              <h2 className="heading2">I create super awesome stuff</h2>
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="contents shadow">
+              <h2 className="heading2">I&apos;m available for freelance projects</h2>
+            </div>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="row list">
+          {
+            projects.map(p =>
+              <div className="col-md-4" key={p.id}>
+                <div className="contents shadow">
+                  {/* <img src="images/latest_portfolio_01.jpg" alt="latest_portfolio_01"> */}
+                  <div className="hover_contents">
+                    <div className="list_info">
+                      <h3>
+                        <a href="">Project Title</a>
+                        <Image src="/images/portfolio_list_arrow.png" width={6} height={8} alt="list arrow" />
+                        </h3>
+                      <p><a href="">Click to see project</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+          }
         </div>
-      </main>
-    </div>
+        <p className="porfolio_readmore">
+          <a href="" className="primary-btn">See my full portfolio</a>
+        </p>
+      </div>
+    </>
   );
 }

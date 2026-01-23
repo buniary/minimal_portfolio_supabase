@@ -1,3 +1,4 @@
+"use client"; 
 import { createClient } from "@/utils/supabase/client";
 
 export default function Insert(){
@@ -7,7 +8,13 @@ export default function Insert(){
     e.preventDefault();
     const { error } = await supabase
     .from('portfolio')
-    .insert({ title: '제목 테스트', content: '본문 테스트' })
+    .insert({ 
+      title: '제목 테스트', 
+      content: '본문 테스트', 
+      url: 'https://github.com/buniary', 
+      review: '수파베이스 레파지토리 주소', 
+      reviewer: 'buniary'
+    })
   
     console.log(error);
   }

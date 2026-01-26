@@ -1,10 +1,13 @@
 import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
-  const supabase = await createClient();
-  const { data: projects } = await supabase.from("portfolio").select();
+  const supabase = createClient();
+  const { data: projects } = await supabase.from("portfolio").select().limit(3).order('id', { ascending: false });
   console.log(projects);
+
+
   return (
     <>
       <div className="container latest_portfolio">
@@ -34,21 +37,36 @@ export default async function Home() {
                   <div className="hover_contents">
                     <div className="list_info">
                       <h3>
-                        <a href="">Project Title</a>
+                        <Link href={`/detail/${p.id}`}>{p.title}</Link>
                         <Image src="/images/portfolio_list_arrow.png" width={6} height={8} alt="list arrow" />
-                        </h3>
-                      <p><a href="">Click to see project</a></p>
+                      </h3>
+                      <p>
+                        <Link href={`/detail/${p.id}`}>Click to see project</Link>
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             )
           }
+
+
+          {/* <div className="col-md-4">
+            <div className="contents shadow">
+              <img src="images/latest_portfolio_01.jpg" alt="latest_portfolio_01">
+                <div className="hover_contents">
+                  <div className="list_info">
+                    <h3><a href="">Project Title</a> <img src="images/portfolio_list_arrow.png" alt="list arrow"></h3>
+                    <p><a href="">Click to see project</a></p>
+                  </div>
+                </div>
+            </div>
+          </div>    */}
         </div>
         <p className="porfolio_readmore">
           <a href="" className="primary-btn">See my full portfolio</a>
         </p>
       </div>
     </>
-  );
+  )
 }

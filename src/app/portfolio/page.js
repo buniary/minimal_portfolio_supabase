@@ -17,10 +17,10 @@ export default async function Portfolio() {
                 {/* <Image src="/images/latest_portfolio_01.jpg" alt="latest_portfolio_01" width={} height={}/> */}
                 <div className="hover_contents">
                   <div className="list_info">
-                    <h3><Link href="">{p.title}</Link>
+                    <h3><Link href={`/detail/${p.id}`}>{p.title}</Link>
                       {/* <Image src="/images/portfolio_list_arrow.png" alt="list arrow" /> */}
                     </h3>
-                    <p><Link href="">Click to see project</Link></p>
+                    <p><Link href={`/detail/${p.id}`}>Click to see project</Link></p>
                   </div>
                 </div>
               </div>

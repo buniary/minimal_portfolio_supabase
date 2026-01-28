@@ -8,6 +8,15 @@ export default async function Home() {
   console.log(projects);
 
 
+  const getPublicUrl = (path) => {
+    const { data } = supabase
+      .storage
+      .from('portfolio')
+      .getPublicUrl(path)
+    return data.publicUrl;
+  }
+
+
   return (
     <>
       <div className="container latest_portfolio">
@@ -33,7 +42,7 @@ export default async function Home() {
             projects.map(p =>
               <div className="col-md-4" key={p.id}>
                 <div className="contents shadow">
-                  {/* <img src="images/latest_portfolio_01.jpg" alt="latest_portfolio_01"> */}
+                  <Image src={getPublicUrl(p.thumbnail)} width={364} height={209} alt={p.title} />
                   <div className="hover_contents">
                     <div className="list_info">
                       <h3>

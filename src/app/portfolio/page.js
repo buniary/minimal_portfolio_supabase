@@ -35,7 +35,7 @@ export default async function Portfolio() {
                 <div className="hover_contents">
                   <div className="list_info">
                     <h3><Link href={`/detail/${p.id}`}>{p.title}</Link>
-                      <Image src="/images/portfolio_list_arrow.png" width={6} height={8} a alt="list arrow" />
+                      <Image src="/images/portfolio_list_arrow.png" width={6} height={8} alt="list arrow" />
                     </h3>
                     <p><Link href={`/detail/${p.id}`}>Click to see project</Link></p>
                   </div>
